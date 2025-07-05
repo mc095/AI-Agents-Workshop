@@ -33,6 +33,7 @@ Welcome to the AI Agents Workshop! This tutorial will guide you step-by-step thr
 ### 2. Todo App (Found in the `todo_app/` folder)
 - Apply what you've learned by building a complete Todo application.
 - Explore the code in `main.py` and the static files for the web interface.
+- run command `uvicorn main:app --reload`
 - Experiment with adding, updating, and deleting tasks using the API and frontend.
 
 ---
@@ -40,6 +41,7 @@ Welcome to the AI Agents Workshop! This tutorial will guide you step-by-step thr
 ### 3. AI Agents Course (Found in the `ai-agent/` folder)
 - Dive into more advanced topics related to AI agents using [agno](https://docs.agno.com/introduction).
 - Study the code in `agent.py`, `main.py`, and `models.py`.
+- run command `uvicorn main:app --reload`
 - Explore how agents can interact with APIs and databases.
 - Review the static files for the chatbot interface.
 
