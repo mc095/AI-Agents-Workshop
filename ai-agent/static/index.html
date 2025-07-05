@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bento Todo App</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-50 font-sans min-h-screen p-4">
+    <div class="max-w-7xl mx-auto">
+        <div class="bento-grid">
+            <!-- Tasks Section -->
+            <div class="bento-box bg-white p-6 span-6 row-span-4">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-xl font-semibold text-gray-900">My Tasks</h2>
+                    <div class="flex space-x-2">
+                        <button id="filterAll"
+                            class="px-3 py-1 text-sm rounded-full bg-primary-100 text-primary-600">All</button>
+                        <button id="filterActive"
+                            class="px-3 py-1 text-sm rounded-full text-gray-600 hover:bg-gray-100">Active</button>
+                        <button id="filterCompleted"
+                            class="px-3 py-1 text-sm rounded-full text-gray-600 hover:bg-gray-100">Completed</button>
+                    </div>
+                </div>
+                <div id="addTaskForm" class="mb-6 hidden">
+                    <div class="space-y-4">
+                        <input type="text" id="taskName" placeholder="Task name"
+                            class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                        <textarea id="taskDescription" placeholder="Description (optional)" rows="2"
+                            class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"></textarea>
+                        <div class="flex space-x-2">
+                            <button id="saveTaskBtn"
+                                class="flex-1 bg-primary-500 text-white py-2 px-4 rounded-lg hover:bg-primary-600 transition-colors">Add
+                                Task</button>
+                            <button id="cancelTaskBtn"
+                                class="flex-1 bg-gray-100 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-200 transition-colors">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+                <button id="addTaskBtn"
+                    class="w-full mb-4 bg-primary-50 text-primary-600 py-2 px-4 rounded-lg hover:bg-primary-100 transition-colors flex items-center justify-center">
+                    <i class="fas fa-plus mr-2"></i> Add Task
+                </button>
+                <div id="tasksList" class="space-y-3"></div>
+            </div>
+
+            <!-- Calendar Section -->
+            <div class="bento-box bg-white p-4 span-3 row-span-2">
+                <div class="flex justify-between items-center mb-2">
+                    <h2 class="text-xl font-semibold text-gray-900">Calendar</h2>
+                    <div class="flex space-x-2">
+                        <button id="prevMonth" class="p-1 rounded-full hover:bg-gray-100 transition-colors">
+                            <i class="fas fa-chevron-left text-gray-500"></i>
+                        </button>
+                        <h3 id="currentMonthYear" class="text-lg font-medium text-gray-900">July 2025</h3>
+                        <button id="nextMonth" class="p-1 rounded-full hover:bg-gray-100 transition-colors">
+                            <i class="fas fa-chevron-right text-gray-500"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="grid grid-cols-7 gap-1 text-center mb-1">
+                    <div class="text-xs font-medium text-gray-500 py-1">Sun</div>
+                    <div class="text-xs font-medium text-gray-500 py-1">Mon</div>
+                    <div class="text-xs font-medium text-gray-500 py-1">Tue</div>
+                    <div class="text-xs font-medium text-gray-500 py-1">Wed</div>
+                    <div class="text-xs font-medium text-gray-500 py-1">Thu</div>
+                    <div class="text-xs font-medium text-gray-500 py-1">Fri</div>
+                    <div class="text-xs font-medium text-gray-500 py-1">Sat</div>
+                </div>
+                <div id="calendarDays" class="grid grid-cols-7 gap-1 calendar-container"></div>
+            </div>
+
+            <!-- Stats and Weather combined -->
+            <div class="bento-box bg-white p-4 span-3 row-span-1">
+                <div class="flex justify-between items-center mb-2">
+                    <h2 class="text-xl font-semibold text-gray-900">Stats & Weather</h2>
+                </div>
+                <div class="flex space-x-4">
+                    <div class="w-1/2">
+                        <div class="text-gray-500 text-sm mb-1">Tasks Completed</div>
+                        <div class="text-lg font-medium mb-3" id="completedTasks">0</div>
+                        <div class="text-gray-500 text-sm mb-1">Active Tasks</div>
+                        <div class="text-lg font-medium" id="activeTasks">0</div>
+                    </div>
+                    <div class="w-1/2 text-center">
+                        <div class="text-3xl mb-1" id="weatherEmoji">🌡️</div>
+                        <div class="text-lg font-medium" id="weatherTemp">Loading...</div>
+                        <div class="text-gray-600 text-sm" id="weatherDesc">Fetching weather...</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Favorite Song Section -->
+            <div class="bento-box bg-pastel-purple p-4 span-3 row-span-3 flex flex-col justify-between overflow-hidden">
+                <div class="flex justify-between items-center mb-2">
+                    <h2 class="text-lg font-semibold text-gray-900">Favorite Song</h2>
+                    <button id="changeSongBtn" class="text-primary-500 hover:text-primary-700 text-sm">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                </div>
+                <div class="flex flex-col items-center flex-1 justify-center gap-2 overflow-hidden">
+                    <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center shadow mb-2">
+                        <i class="fas fa-music text-2xl text-primary-500"></i>
+                    </div>
+                    <div class="text-center">
+                        <h3 class="text-base font-semibold text-gray-800" id="songTitle">Blinding Lights</h3>
+                        <p class="text-sm text-gray-600" id="songArtist">The Weeknd</p>
+                    </div>
+                    <div class="w-full mt-2 overflow-hidden rounded-lg">
+                        <iframe id="songEmbed" width="100%" height="80" class="rounded-lg" frameborder="0"
+                            allow="encrypted-media" src="https://open.spotify.com/embed/track/0VjIjW4GlUZAMYd2vXMi3b">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Habit Tracker -->
+            <div class="bento-box bg-pastel-blue p-4 span-3 row-span-2">
+                <div class="flex justify-between items-center mb-2">
+                    <h2 class="text-lg font-semibold text-gray-900">Habit Tracker</h2>
+                    <button id="editHabitsBtn" class="text-primary-500 hover:text-primary-700 text-sm">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                </div>
+                <div id="editHabitsForm" class="mb-4 hidden">
+                    <div class="space-y-4">
+                        <div>
+                            <input type="text" id="habit1Name" placeholder="Habit 1 name"
+                                class="w-full px-4 py-2 border border-gray-200 rounded-lg mb-2">
+                            <input type="text" id="habit1Time" placeholder="Time (e.g., 5:00 AM)"
+                                class="w-full px-4 py-2 border border-gray-200 rounded-lg">
+                        </div>
+                        <div>
+                            <input type="text" id="habit2Name" placeholder="Habit 2 name"
+                                class="w-full px-4 py-2 border border-gray-200 rounded-lg mb-2">
+                            <input type="text" id="habit2Time" placeholder="Time (e.g., 8:00 PM)"
+                                class="w-full px-4 py-2 border border-gray-200 rounded-lg">
+                        </div>
+                        <div>
+                            <input type="text" id="habit3Name" placeholder="Habit 3 name"
+                                class="w-full px-4 py-2 border border-gray-200 rounded-lg mb-2">
+                            <input type="text" id="habit3Time" placeholder="Time (e.g., 10:00 AM)"
+                                class="w-full px-4 py-2 border border-gray-200 rounded-lg">
+                        </div>
+                        <div class="flex space-x-2">
+                            <button id="saveHabitsBtn"
+                                class="flex-1 bg-primary-500 text-white py-2 px-4 rounded-lg hover:bg-primary-600 transition-colors">Save</button>
+                            <button id="cancelHabitsBtn"
+                                class="flex-1 bg-gray-100 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-200 transition-colors">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+                <div id="habitsList" class="space-y-2"></div>
+            </div>
+
+            <!-- Notes Section -->
+            <div class="bento-box bg-pastel-yellow p-4 span-3 row-span-2 flex flex-col overflow-hidden">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-lg font-semibold text-gray-900">Notes</h2>
+                    <div class="flex space-x-3">
+                        <button id="saveNotesBtn" class="text-primary-500 hover:text-primary-700 text-sm">
+                            <i class="fas fa-save"></i>
+                        </button>
+                        <button id="clearNotesBtn" class="text-gray-400 hover:text-red-500 text-sm">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="flex flex-col h-full">
+                    <textarea id="notesTextarea"
+                        class="flex-grow w-full p-3 text-sm border border-gray-200 rounded-lg resize-none overflow-auto focus:ring-2 focus:ring-yellow-300 focus:border-yellow-300 bg-pastel-yellow placeholder-gray-600"></textarea>
+                    <div class="mt-3 flex justify-between items-center">
+                        <span id="charCount" class="text-xs text-gray-500">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="bento-box bg-pastel-green p-4 span-3 row-span-2 flex flex-col overflow-hidden">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-lg font-semibold text-gray-900">Quick Links</h2>
+                </div>
+                <div class="grid grid-cols-2 gap-3 h-full">
+                    <a href="https://www.goodreads.com/shelf/show/asian"
+                        class="bg-white p-3 rounded-lg shadow-sm flex flex-col items-center justify-center hover:shadow-md transition-shadow">
+                        <div class="w-10 h-10 rounded-full bg-primary-100 flex items-center justify-center mb-2">
+                            <i class="fas fa-book text-primary-500 text-lg"></i>
+                        </div>
+                        <span class="text-sm font-medium text-gray-800">Books</span>
+                    </a>
+                    <a href="https://www.imdb.com/list/ls031396649/"
+                        class="bg-white p-3 rounded-lg shadow-sm flex flex-col items-center justify-center hover:shadow-md transition-shadow">
+                        <div class="w-10 h-10 rounded-full bg-primary-100 flex items-center justify-center mb-2">
+                            <i class="fas fa-film text-primary-500 text-lg"></i>
+                        </div>
+                        <span class="text-sm font-medium text-gray-800">Movies</span>
+                    </a>
+                    <a href="https://www.rockstargames.com/VI"
+                        class="bg-white p-3 rounded-lg shadow-sm flex flex-col items-center justify-center hover:shadow-md transition-shadow">
+                        <div class="w-10 h-10 rounded-full bg-primary-100 flex items-center justify-center mb-2">
+                            <i class="fas fa-gamepad text-primary-500 text-lg"></i>
+                        </div>
+                        <span class="text-sm font-medium text-gray-800">Games</span>
+                    </a>
+                    <a href="https://www.food.com/recipe/yummy-crunchy-apple-pie-31128"
+                        class="bg-white p-3 rounded-lg shadow-sm flex flex-col items-center justify-center hover:shadow-md transition-shadow">
+                        <div class="w-10 h-10 rounded-full bg-primary-100 flex items-center justify-center mb-2">
+                            <i class="fas fa-utensils text-primary-500 text-lg"></i>
+                        </div>
+                        <span class="text-sm font-medium text-gray-800">Recipes</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Image Gallery -->
+            <div class="bento-box bg-pastel-blue p-4 span-6 row-span-2">
+                <div class="flex justify-between items-center mb-2">
+                    <h2 class="text-lg font-semibold text-gray-900">Gallery</h2>
+                    <button id="refreshImagesBtn" class="text-primary-500 hover:text-primary-700 text-sm">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                </div>
+                <div class="grid grid-cols-3 gap-2">
+                    <div class="aspect-square rounded-lg overflow-hidden">
+                        <img id="galleryImage1" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e"
+                            alt="Beach" class="w-full h-full object-cover hover:scale-105 transition-transform">
+                    </div>
+                    <div class="aspect-square rounded-lg overflow-hidden">
+                        <img id="galleryImage2" src="https://images.unsplash.com/photo-1519046904884-53103b34b206"
+                            alt="Ocean" class="w-full h-full object-cover hover:scale-105 transition-transform">
+                    </div>
+                    <div class="aspect-square rounded-lg overflow-hidden">
+                        <img id="galleryImage3" src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05"
+                            alt="Forest" class="w-full h-full object-cover hover:scale-105 transition-transform">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <a href="chatbot.html"
+            class="fixed bottom-6 right-6 bg-primary-500 text-white p-4 rounded-full shadow-lg hover:bg-primary-600 transition-colors">
+            <i class="fas fa-robot"></i>
+        </a>
+
+
+    </div>
+
+    <script src="js/script.js"></script>
+    
+
+</body>
+
+</html>

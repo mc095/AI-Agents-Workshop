@@ -1,0 +1,137 @@
+.bento-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 1.5rem;
+}
+
+.bento-box {
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.span-6 {
+    grid-column: span 6;
+}
+
+.span-5 {
+    grid-column: span 5;
+}
+
+.span-4 {
+    grid-column: span 4;
+}
+
+.span-3 {
+    grid-column: span 3;
+}
+
+.span-2 {
+    grid-column: span 2;
+}
+
+.row-span-1 {
+    grid-row: span 1;
+}
+
+.row-span-2 {
+    grid-row: span 2;
+}
+
+.row-span-3 {
+    grid-row: span 3;
+}
+
+.row-span-4 {
+    grid-row: span 4;
+}
+
+.calendar-container {
+    height: calc(100% - 3rem);
+}
+
+.panorama-container {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 0.5rem;
+}
+
+.panorama-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.panorama-image:hover {
+    transform: scale(1.05);
+}
+
+/* Color definitions */
+.bg-pastel-purple {
+    background-color: #f3e5f5;
+}
+
+.bg-pastel-blue {
+    background-color: #e1f5fe;
+}
+
+.bg-pastel-yellow {
+    background-color: #fff8e1;
+}
+
+.bg-pastel-green {
+    background-color: #e8f5e9;
+}
+
+.bg-primary-50 {
+    background-color: #eff6ff;
+}
+
+.bg-primary-100 {
+    background-color: #dbeafe;
+}
+
+.bg-primary-500 {
+    background-color: #3b82f6;
+}
+
+.text-primary-500 {
+    color: #3b82f6;
+}
+
+.text-primary-600 {
+    color: #2563eb;
+}
+
+@media (max-width: 1024px) {
+    .bento-grid {
+        grid-template-columns: repeat(6, 1fr);
+    }
+
+    .span-6,
+    .span-5,
+    .span-4,
+    .span-3 {
+        grid-column: span 6;
+    }
+
+    .span-2 {
+        grid-column: span 3;
+    }
+}
+
+@media (max-width: 640px) {
+    .bento-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .span-6,
+    .span-5,
+    .span-4,
+    .span-3,
+    .span-2 {
+        grid-column: span 2;
+    }
+}

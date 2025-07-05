@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/chatbot.css">
+</head>
+<body class="bg-[#121212] text-[#E0E0E0]">
+
+    <div class="chatbot-container">
+        <main id="conversation-area" class="conversation-area">
+            <div id="initial-message" class="flex flex-col items-center justify-center h-full">
+                <div class="w-16 h-16 rounded-full bg-[#20B2AA] flex items-center justify-center mb-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 text-white"><path d="m12 3-1.9 4.8-4.8 1.9 4.8 1.9L12 16l1.9-4.8 4.8-1.9-4.8-1.9L12 3z"/><path d="M5 8v4"/><path d="M19 8v4"/><path d="M8 5h4"/><path d="M8 19h4"/><path d="M3 12h4"/><path d="M17 12h4"/></svg>
+                </div>
+                <h2 class="text-3xl font-light text-white mb-4">How can I help you today?</h2>
+                <p class="text-[#888888] text-center max-w-lg leading-relaxed">
+                    I'm an AI assistant. Ask me anything.
+                </p>
+            </div>
+        </main>
+
+        <footer class="input-area-container">
+            <div class="input-wrapper">
+                <form id="chat-form" class="chat-form" onsubmit="return false;">
+                    <textarea
+                        id="chatInput"
+                        placeholder="Ask a follow-up..."
+                        rows="1"
+                    ></textarea>
+                    <button type="submit" id="sendChatBtn" title="Send message">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7 11L12 6L17 11M12 18V7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </form>
+            </div>
+        </footer>
+    </div>
+
+    <script src="js/agent.js"></script>
+</body>
+</html>

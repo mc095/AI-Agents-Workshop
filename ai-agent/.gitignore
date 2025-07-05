@@ -1,0 +1,3 @@
+.env.local
+todos.db
+__pycache__
