@@ -53,7 +53,7 @@ Welcome to the AI Agents Workshop! This tutorial will guide you step-by-step thr
 - Experiment and modify the code to deepen your understanding.
 
 ## Other Materials
-Event Posters : [Figma Jam](https://www.figma.com/design/iaCwDSRahM91AdDk6XQM3S/AI-Agents-Workshop---Posters?node-id=0-1&t=S0WHc3obLvIbB3du-1)
+Event Posters : [Figma Jam](https://www.figma.com/design/iaCwDSRahM91AdDk6XQM3S/AI-Agents-Workshop---Posters?node-id=0-1&t=S0WHc3obLvIbB3du-1)  
 PPT Template : [Figma Template](https://www.figma.com/files/team/1384737198592189263/resources/community/file/1442259144477132246?fuid=1384737196354114254)
 
 Happy learning!
